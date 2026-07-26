@@ -1,0 +1,23 @@
+{:paths ["src"]
+ ;; No runtime dependencies, deliberately. The whole point of the library is
+ ;; the shape of an event-log operation map -- `langchain.persist/scoped`
+ ;; binds it, `langchain.db/create-conn` consumes it, and neither is named
+ ;; here. The host seam (`journal.fs`) is a plain map too, so a caller with
+ ;; no filesystem supplies its own sink.
+ :deps {}
+ :aliases
+ {;; langchain is a TEST dependency only: journal.langchain-test proves the
+  ;; two shapes still fit each other. Same optional-dep isolation langchain
+  ;; itself uses for http-kit -- it must not become a runtime dep here.
+  :test {:extra-paths ["test"]
+         :extra-deps {io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}
+                      io.github.kotoba-lang/langchain
+                      {:git/sha "8789fe4cc387f294b6936f2171e419a252fd9ea8"}}
+         :main-opts ["-m" "cognitect.test-runner"]
+         :exec-fn cognitect.test-runner.api/test}
+  ;; local checkout for workspace development (orgs/kotoba-lang/*)
+  :dev {:override-deps {io.github.kotoba-lang/langchain {:local/root "../langchain"}}}
+  :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
+         :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
+                     "--fail-level" "error"]}}}
