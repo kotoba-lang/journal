@@ -43,7 +43,7 @@
   secrets: do not journal a store whose delete has to actually erase (see
   `authenticator`'s vault, which stays a rewritten snapshot for exactly this
   reason)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             #?(:clj [clojure.edn :as edn]
                :cljs [cljs.reader :as edn])))
 
