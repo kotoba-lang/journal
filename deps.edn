@@ -4,7 +4,12 @@
  ;; binds it, `langchain.db/create-conn` consumes it, and neither is named
  ;; here. The host seam (`journal.fs`) is a plain map too, so a caller with
  ;; no filesystem supplies its own sink.
- :deps {}
+ :deps {
+        ;; kotoba.lang.text, not clojure.string. Pinned as an explicit floor:
+        ;; tools.deps takes the NEWEST sha it is shown, so without a floor here
+        ;; this repo silently rides whatever a sibling happens to name.
+        io.github.kotoba-lang/text {:git/sha "73bdb13ae7a3d004b44bca08be03a3191157a38f"}
+       }
  :aliases
  {;; langchain is a TEST dependency only: journal.langchain-test proves the
   ;; two shapes still fit each other. Same optional-dep isolation langchain
