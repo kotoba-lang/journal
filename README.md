@@ -89,6 +89,6 @@ still fit each other, and nothing in `src/` names it.
 ## Test
 
 ```bash
-clojure -M:test          # CI: langchain from git
-clojure -M:dev:test      # workspace: langchain from ../langchain
+kbb -M:test          # CI: langchain from git
+kbb -M:dev:test      # workspace: langchain from ../langchain
 ```
