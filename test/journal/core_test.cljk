@@ -1,5 +1,5 @@
 (ns journal.core-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [journal.core :as journal]
             [journal.fs :as journal.fs]))
 
