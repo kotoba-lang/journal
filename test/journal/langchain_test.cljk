@@ -2,7 +2,7 @@
   "The contract this library exists for: a `langchain.db` connection whose
   history outlives the process. `journal.core` never mentions langchain, so
   this is the test that keeps the two shapes honest with each other."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [journal.core :as journal]
             [journal.fs :as journal.fs]
             [langchain.db :as db]
