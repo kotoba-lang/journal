@@ -1,5 +1,5 @@
 (ns journal.core-test
-  (:require [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is testing]]
             [journal.core :as journal]
             [journal.fs :as journal.fs]))
 
@@ -58,7 +58,7 @@
   (is (= [] ((:read (journal/journal (journal.fs/memory-io))) :s 0))))
 
 (deftest rejects-a-sink-that-is-not-one
-  (is (thrown? #?(:clj clojure.lang.ExceptionInfo :cljs cljs.core/ExceptionInfo)
+  (is (thrown? kerror/ExceptionInfo
                (journal/journal {:read-text "not a fn"}))))
 
 #?(:clj
