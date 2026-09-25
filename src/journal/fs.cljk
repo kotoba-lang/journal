@@ -12,7 +12,7 @@
   Clojure and ClojureScript on Node. Both append and never rewrite, and both
   create the parent directory on first write, so a caller can name a path
   under a directory that does not exist yet."
-  #?(:clj (:require [clojure.java.io :as io])))
+  #?(:clj (:require [kotoba.io :as io])))
 
 (defn memory-io
   "An in-memory sink over an atom holding the journal text. Takes the atom
@@ -32,12 +32,12 @@
      (let [lock (Object.)]
        {:read-text (fn []
                      (let [f (io/file path)]
-                       (when (.exists f) (slurp f))))
+                       (when (io/exists? f) (slurp f))))
         :append-text! (fn [text]
                         (locking lock
                           (let [f (io/file path)]
-                            (when-let [parent (.getParentFile f)]
-                              (.mkdirs parent))
+                            (when-let [parent (io/parent-file f)]
+                              (io/mkdirs parent))
                             (spit f text :append true))))})))
 
 #?(:cljs
